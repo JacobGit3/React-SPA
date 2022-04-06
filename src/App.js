@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Nav from './components/nav';
 import About from './components/about';
 import Gallery from './components/gallery';
+import ContactForm from './components/contact';
 
 function App() {
   const [categories] = useState([
@@ -16,16 +17,26 @@ function App() {
 
   const [currentCategory, setCurrentCategory] = useState(categories[0]);
 
+  const [contactSelected, setContactSelected] = useState(false);
+
   return (
     <div>
       <Nav
         categories={categories}
         setCurrentCategory={setCurrentCategory}
         currentCategory={currentCategory}
+        contactSelected={contactSelected}
+        setContactSelected={setContactSelected}
       ></Nav>
       <main>
-        <Gallery currentCategory={currentCategory}></Gallery>
-        <About></About>
+        {!contactSelected ? (
+          <>
+            <Gallery currentCategory={currentCategory}></Gallery>
+            <About></About>
+          </>
+        ) : (
+            <ContactForm></ContactForm>
+          )}
       </main>
     </div>
   );
